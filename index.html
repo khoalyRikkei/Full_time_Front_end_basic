@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 01 - HTML Basic</title>
+    <!-- Tạo icon trên tab trình duyệt -->
+    <link rel="icon" href="./images/icon_web.png" />
+    <style>
+      .test {
+        height: 1000px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1 id="products">HMTL Basic - ngày 20/03/2023</h1></header>
+    <main></main>
+
+    <h3>CÔng cụ hỗ trợ:</h3>
+    <a href="https://www.w3schools.com/" target="_blank"> W3school</a>
+    <a href="https://developer.mozilla.org/en-US/" target="_blank">
+      developer mozilla</a
+    >
+
+    <!-- Nhóm thẻ heading -->
+    <section>
+      <header><h2>Các thẻ heading</h2></header>
+      <h1>Thẻ h1 - có kích thước lớn nhất - font-size: 2em</h1>
+      <h2>Thẻ h2 - font-size: 1.5em</h2>
+      <h3>Thẻ h3 - font-size: 1.17em</h3>
+      <h4>Thẻ h4 - font-size: 1em</h4>
+      <h5>Thẻ h5 - font-size: 0.83em</h5>
+      <h6>Thẻ h6 - font-size: 0.67em</h6>
+    </section>
+
+    <!-- Comment - tổ hợp phím Ctrl + / -->
+    <!-- Thẻ văn bản p paragraphs -->
+    <p>Thẻ văn bản</p>
+
+    <!-- Thẻ ngắ dòng -->
+    <p>Dòng đầu</p>
+    <br />
+    <p>Dòng đã được ngắt bằng thẻ p</p>
+
+    <!-- Thẻ danh sách không có thứ tự -->
+    <h3>Danh sách thú cưng có bán tại cửa hàng</h3>
+    <ul>
+      <li>Chó</li>
+      <li>Mèo</li>
+      <li>Chim</li>
+      <li>Sóc</li>
+    </ul>
+
+    <!-- Thẻ danh sách có thứ tự-->
+
+    <h3>Danh sách lớp full time - Javascript tháng 03/2023</h3>
+    <ol type="a">
+      <li>Nhàn</li>
+      <li>Khoa</li>
+      <li>Phúc</li>
+      <li>Tú</li>
+    </ol>
+    <!-- Thẻ nav -->
+    <nav>
+      <p>Trang web của chúng tôi</p>
+      <ul>
+        <li><a href="http://zingnews.vn" target="_blank">Zing news</a></li>
+
+        <!-- Mở một tab mới dùng target="_blank" -->
+        <!-- Mặc định là target='_self' -->
+        <li><a href="/" target="_blank">About us</a></li>
+        <li><a href="#products">Product</a></li>
+        <li><a href="#contact">Contact us</a></li>
+      </ul>
+    </nav>
+    <!-- Thẻ hình ảnh dùng figure -->
+
+    <figure>
+      <img
+        src="https://znews-photo.zingcdn.me/w660/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"
+        alt="anh-tre-em"
+      />
+      <figcaption><code>Hình ảnh trẻ em</code></figcaption>
+    </figure>
+
+    <!-- Thẻ select -->
+    <h3>Bạn quê ở đâu?</h3>
+    <select>
+      <option>Cà Mau</option>
+      <option>Quảng Nam</option>
+      <option>Đà Nẵng</option>
+    </select>
+
+    <p class="test"></p>
+    <h3 id="contact">Liên hệ chúng tôi qua hotline</h3>
+    <p><i>0909000999</i></p>
+  </body>
+</html>
