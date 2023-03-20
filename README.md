@@ -18,3 +18,15 @@ Các bước đẩy source code lên git
 <!-- Xóa link repo hiện tại-->
 
 git remote rm origin
+
+<!-- Clone repo về -->
+
+git clone <link repo>
+
+<!-- Check all branch -->
+
+git branch -a
+
+<!-- Chuyển branch -->
+
+git checkout <ten_branch>
