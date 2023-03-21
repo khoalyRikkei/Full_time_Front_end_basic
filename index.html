@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo HTML5</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="./images/Logo-Rikkei.png" alt="" width="150" />
+        </div>
+        <ul class="menu">
+          <li><a href="./video.html">Video giới thiệu</a></li>
+          <li><a href="./audio.html">Album audio</a></li>
+          <li><a href="./media.html">Photos</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <header><h3>Video giới thiệu về Rikkei Academy</h3></header>
+        <video autoplay width="50%" controls muted>
+          <source src="./video/Video_KG.mp4" />
+        </video>
+        <br />
+        <a href="./video.html" target="_blank">Xem thêm</a>
+      </section>
+      <section>
+        <header><h3>Audio nổi bật</h3></header>
+        <audio controls>
+          <source
+            src="./audio/150 Bản Hòa Tấu Hay Nhất Thế Giới - Nhạc Không Lời Dành Cho Quán Cafe Phòng Trà Sang Trọng Nhất.mp3"
+            type="audio/ogg"
+          />
+          Your browser does not support the audio element.
+        </audio>
+        <br />
+        <a href="./audio.html" target="_blank">Xem thêm</a>
+      </section>
+      <section>
+        <header><h3>Hình ảnh tổng hợp</h3></header>
+        <img
+          src="./images/LOGO RIKKEI ACADEMY 2022-01.png"
+          alt=""
+          width="50%"
+        />
+        <br />
+        <a href="./media.html" target="_blank">Xem thêm</a>
+      </section>
+    </main>
+    <aside>
+      <h3>Đánh giá:</h3>
+      <label for="service">Chất lượng dịch vụ</label>
+      <progress id="service" value="90" max="100">90%</progress>
+      <br />
+      <label for="infrastructure">Cơ sở vật chất</label>
+      <progress id="infrastructure" value="95" max="100">95%</progress>
+    </aside>
+    <footer>
+      <h3>Liên hệ với chúng tôi</h3>
+      <ul>
+        <li>
+          <b>Hotline: </b>
+          <a href="tel:0909000999"> 0909000999</a>
+        </li>
+        <li>
+          <b>Email: </b>
+          <a href="mailto:leykhoaqk@gmail.com">leykhoaqk@gmail.com</a>
+        </li>
+        <li>
+          <b>Zalo: </b>
+          <a href="https://zalo.me/84909109396" target="_blank">0909109396</a>
+        </li>
+      </ul>
+    </footer>
+  </body>
+</html>
