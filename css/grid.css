@@ -1,0 +1,50 @@
+.grid-1 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 100px;
+  grid-template-areas:
+    "header header header header header"
+    "menu main main main right"
+    "menu article article . right"
+    "footer footer footer footer footer";
+  margin-bottom: 50px;
+}
+
+.grid-1 .item-1 {
+  grid-area: header;
+  height: 60px;
+}
+.grid-1 .item-2 {
+  grid-area: menu;
+}
+.grid-1 .item-3 {
+  grid-area: main;
+}
+.grid-1.item-4 {
+  grid-area: right;
+}
+.grid-1 .item-5 {
+  grid-area: article;
+}
+.grid-1 .item-6 {
+  grid-area: footer;
+}
+.item {
+  border: 2px solid green;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
+}
+
+.grid-2 .item {
+  border: 2px solid red;
+}
+
+.item-13 {
+  grid-column: 1 / span 3;
+  /* grid-column-start: 1; */
+  /* grid-column-end: 4; */
+}

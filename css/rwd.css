@@ -1,0 +1,84 @@
+body {
+}
+
+/* @media type  */
+
+/* Đối với desktop first thì viết max-width từ lớn đến nhỏ */
+@media screen and (max-width: 992px) {
+  body {
+    background-color: green;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-color: red;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    background-color: yellow;
+  }
+}
+
+/* Đối với mobile first thì viết min-width từ nhỏ đến lớn */
+
+.desktop {
+  display: none;
+  font-size: 100px;
+}
+.tablet {
+  display: none;
+  font-size: 100px;
+}
+.mobile {
+  font-size: 100px;
+}
+
+#test-2 .content {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: 200px;
+}
+
+.item {
+  background: grey;
+}
+
+@media screen and (min-width: 768px) {
+  .tablet {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: none;
+  }
+  #test-2 .content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #test-2 .content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #test-2 .content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .tablet {
+    display: none;
+  }
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: block;
+  }
+}
