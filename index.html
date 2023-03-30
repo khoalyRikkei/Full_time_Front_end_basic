@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 09</title>
+    <style>
+      .item {
+        padding: 50px;
+        border: 2px solid green;
+        border-radius: 20px;
+        margin: 20px;
+      }
+      td,
+      th {
+        min-width: 150px;
+        margin-left: 20px;
+      }
+      select {
+        width: 100%;
+      }
+      input,
+      select,
+      option {
+        padding: 10px;
+      }
+      #result {
+        width: 500px;
+        padding: 20px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="item">
+        <h3>Bài 1</h3>
+        <!-- Copy theo, chưa cần hiểu sâu -->
+        <button onclick="bai_1()">1. Tính điểm trung bình</button>
+        <button onclick="bai_2()">2. Đổi nhiệt độ</button>
+        <button onclick="bai_3()">3. Tính diện tích hình tròn</button>
+        <button onclick="bai_4()">4. Tính chu vi hình tròn</button>
+      </section>
+      <section class="item">
+        <h3>Bài 2 - Chuyển đổi tiền tệ</h3>
+        <table>
+          <tr>
+            <th>Amount</th>
+            <th>From Currency</th>
+            <th>To Currency</th>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="number"
+                name="amount"
+                id="amount"
+                placeholder="Nhập số tiền muốn chuyển đổi"
+              />
+            </td>
+            <td>
+              <select name="currency" id="currency" onchange="onChange()">
+                <option value="VND" selected>VNĐ</option>
+                <option value="USD">USD</option>
+              </select>
+            </td>
+            <td><input type="text" disabled id="to-currency" value="USD" /></td>
+            <td><button onclick="convertCurrency()">Convert</button></td>
+          </tr>
+        </table>
+        <br />
+        <input
+          type="text"
+          disabled
+          placeholder="Nhận kết quả sau khi convert"
+          id="result"
+        />
+      </section>
+    </main>
+  </body>
+  <script src="./script.js"></script>
+</html>
