@@ -10,7 +10,7 @@
         width: 600px;
         height: 200px;
         background-size: cover;
-        border: 2px solid;
+        border: 2px solid green;
       }
       .img-head {
         background-image: url(./images/image-1.jpg);
@@ -58,8 +58,10 @@
 
       //   tham số truyền vào element để xác định thẻ nào đang được click
       function changeImage(element) {
+        console.log("AI đang click", element);
+
         const img = element;
-        const classImg = element.className;
+        const classImg = element.className; // class trong html
 
         // Chạy ảnh từ 1 -> 4
         if (x >= 4) {
@@ -68,6 +70,10 @@
           x++;
         }
 
+        // Gán ảnh được click vào url
+        img.style.backgroundImage = ` url(./images/image-${x}.jpg)`;
+
+        // Chức năng nâng cao
         // Lưu số thứ tự ảnh của các phần
         if (classImg == "img-head") {
           imgHead = x;
@@ -76,10 +82,6 @@
         } else {
           imgFoot = x;
         }
-
-        // Gán ảnh được click vào url
-        img.style.backgroundImage = ` url(./images/image-${x}.jpg)`;
-
         // Hiển thị kết quả đúng
         const result = document.querySelector(".result");
         const showPhoto = document.querySelector(".show-photo");

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siêu máy tính</title>
+    <style>
+      input[type="button"] {
+        padding: 5px 15px;
+        border: none;
+        background-color: rgb(198, 194, 194);
+        cursor: pointer;
+      }
+      td {
+        background-color: rgb(198, 194, 194);
+      }
+      caption {
+        margin-bottom: 30px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        width: 80%;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <table cellpadding="10px">
+      <caption>
+        <input type="text" value="0" id="result" />
+      </caption>
+      <tr>
+        <td><input type="button" value="1" /></td>
+        <td><input type="button" value="2" /></td>
+        <td><input type="button" value="3" /></td>
+        <td><input type="button" value="+" /></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="4" /></td>
+        <td><input type="button" value="5" /></td>
+        <td><input type="button" value="6" /></td>
+        <td><input type="button" value="-" /></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="7" /></td>
+        <td><input type="button" value="8" /></td>
+        <td><input type="button" value="9" /></td>
+        <td><input type="button" value="*" /></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="C" /></td>
+        <td><input type="button" value="0" /></td>
+        <td><input type="button" value="=" /></td>
+        <td><input type="button" value="/" /></td>
+      </tr>
+    </table>
+
+    <script>
+      const allButton = document.querySelectorAll('input[type="button"]');
+      const result = document.querySelector("#result");
+      let resultString = "";
+      let isEqual = false;
+
+      allButton.forEach((element) => {
+        // addEventListener() --> method bắt sự kiện của element
+        element.addEventListener("click", function (e) {
+          const numberButton = e.target.value;
+
+          //   Kiểm tra khi dùng nút =
+          if (numberButton == "=") {
+            // eval() là method tính toán từ string
+            resultString = eval(resultString);
+
+            // Chuyển đối trường hợp dấu bằng
+            isEqual = true;
+            return (result.value = resultString);
+          }
+
+          //   Khi nút C
+          if (numberButton == "C") {
+            resultString = 0;
+            return (result.value = 0);
+          }
+
+          //   Nếu là phép tính tiếp theo sau dấu =
+          if (
+            (numberButton == "+" ||
+              numberButton == "-" ||
+              numberButton == "*" ||
+              numberButton == "/") &&
+            isEqual
+          ) {
+            isEqual = false;
+            resultString += numberButton;
+            return (result.value = resultString);
+          } else if (
+            (numberButton != "+" ||
+              numberButton != "-" ||
+              numberButton != "*" ||
+              numberButton != "/") &&
+            isEqual
+          ) {
+            isEqual = false;
+            resultString = numberButton;
+            return (result.value = numberButton);
+          }
+
+          isEqual = false;
+          resultString += numberButton;
+          result.value = resultString;
+        });
+      });
+    </script>
+  </body>
+</html>

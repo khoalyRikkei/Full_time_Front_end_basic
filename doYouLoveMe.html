@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Do you love me</title>
+    <style>
+      .container {
+        margin-top: 300px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Do you love me?</h1>
+      <br />
+      <br />
+      <button onclick="clickYes()">YES</button>
+      <button onmouseover="mouseOver(this)">NO</button>
+    </div>
+    <script>
+      function clickYes() {
+        alert("I LOVE YOU TOO");
+      }
+
+      function mouseOver(element) {
+        const widthSize = window.innerWidth;
+        const heightSize = window.innerHeight;
+
+        const randomWidth = Math.random() * widthSize;
+        const randomHeight = Math.random() * heightSize;
+        console.log(22222, randomWidth, randomHeight);
+
+        console.log(1111111111111, window.innerWidth, window.innerHeight);
+        element.style.position = "absolute";
+        element.style.top = randomHeight + "px";
+        element.style.left = randomWidth + "px";
+      }
+    </script>
+  </body>
+</html>

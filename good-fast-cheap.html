@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Good Fast Cheap</title>
+    <style>
+      .item {
+        display: flex;
+        gap: 30px;
+        width: 300px;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .range {
+        width: 60px;
+        height: 40px;
+        border-radius: 20px;
+
+        background-color: orange;
+        position: relative;
+      }
+      .dot {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: grey;
+        top: -5px;
+        left: -15px;
+        cursor: pointer;
+        transition: all 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="radio" name="good" hidden />
+    <input type="radio" name="fast" hidden />
+    <input type="radio" name="cheap" hidden />
+
+    <div class="container">
+      <div class="item">
+        <h1>GOOD</h1>
+        <div class="range">
+          <div class="dot" onclick="changeChoose(this)" id="good"></div>
+        </div>
+      </div>
+      <div class="item">
+        <h1>FAST</h1>
+        <div class="range">
+          <div class="dot" onclick="changeChoose(this)" id="fast"></div>
+        </div>
+      </div>
+      <div class="item">
+        <h1>CHEAP</h1>
+        <div class="range">
+          <div class="dot" onclick="changeChoose(this)" id="cheap"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function changeChoose(element) {
+        const good = document.getElementsByName("good");
+        const fast = document.getElementsByName("fast");
+        const cheap = document.getElementsByName("cheap");
+        const dotGood = document.querySelector("#good");
+        const dotFast = document.querySelector("#fast");
+        const dotCheap = document.querySelector("#cheap");
+
+        if (element.id == "good") {
+          good.checked = !good.checked;
+        } else if (element.id == "fast") {
+          fast.checked = !fast.checked;
+        } else {
+          cheap.checked = !cheap.checked;
+        }
+
+        if (good.checked && fast.checked && cheap.checked) {
+          if (element.id == "good") {
+            fast.checked = !good.checked;
+          } else if (element.id == "fast") {
+            cheap.checked = !fast.checked;
+          } else {
+            good.checked = !cheap.checked;
+          }
+        }
+
+        good.checked
+          ? (dotGood.style.left = "30px")
+          : (dotGood.style.left = "-15px");
+
+        fast.checked
+          ? (dotFast.style.left = "30px")
+          : (dotFast.style.left = "-15px");
+
+        cheap.checked
+          ? (dotCheap.style.left = "30px")
+          : (dotCheap.style.left = "-15px");
+      }
+    </script>
+  </body>
+</html>
