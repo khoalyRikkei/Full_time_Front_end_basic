@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Click chuột</title>
+    <style>
+      img {
+        position: relative;
+        left: 500px;
+        top: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="moveUp()">Up</button>
+    <button onclick="moveDown()">Down</button>
+    <button onclick="move('right')">Right</button>
+    <button onclick="move('left')">Left</button>
+    <br />
+
+    <img src="./images/bong.jpg" alt="" width="200" id="img-ball" />
+    <script>
+      const ball = document.querySelector("#img-ball");
+
+      let leftMove = 500;
+      let topMove = 200;
+
+      const sizeWidth = window.innerWidth;
+      const sizeHeigth = window.innerHeight;
+
+      function moveUp() {
+        topMove -= 20;
+        if (topMove < -50) {
+          topMove = sizeHeigth;
+        } else if (topMove > sizeHeigth) {
+          topMove = -50;
+        }
+
+        console.log("height ", sizeHeigth, "top", topMove);
+
+        ball.style.top = topMove + "px";
+      }
+      function moveDown() {
+        topMove += 20;
+        ball.style.top = topMove + "px";
+      }
+
+      function move(value) {
+        console.log(111111, value);
+        if (value == "right") {
+          leftMove += 20;
+          ball.style.left = leftMove + "px";
+
+          console.log(ball.style.left);
+        } else {
+          leftMove -= 20;
+          ball.style.left = leftMove + "px";
+        }
+      }
+    </script>
+  </body>
+</html>
