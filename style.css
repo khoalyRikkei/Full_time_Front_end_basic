@@ -1,0 +1,395 @@
+/* add fonts */
+@font-face {
+  font-family: SF Pro;
+  src: url("./fonts/SFPRODISPLAYREGULAR.OTF") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: SF Pro;
+  src: url("./fonts/SFPRODISPLAYMEDIUM.OTF") format("truetype");
+  font-weight: medium;
+}
+@font-face {
+  font-family: SF Pro;
+  src: url("./fonts/SFPRODISPLAYBOLD.OTF") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: SF Pro;
+  src: url("./fonts/SFPRODISPLAYBLACKITALIC.OTF") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+/* root */
+/* Đặt biến và tạo các thuộc tính ngay từ đầu */
+:root {
+  --primary-color: #17a1fa;
+  --secondary-color: #7a61ff;
+  --black-color: #0a2942;
+  --blue-color: #0077c0;
+  --blue-2-color: #c7eeff;
+  font-size: 16px;
+  --small-size: 14px;
+  --title-size: 24px;
+  --head-line: 32px;
+  font-family: SF Pro;
+  font-weight: normal;
+}
+
+/* Màu sắc của tất cả thẻ a theo màu của thẻ cha của nó */
+a {
+  color: inherit;
+}
+
+/* GENERAL CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+}
+
+/* Tất cả hình ảnh width 100% theo thẻ cha */
+img {
+  width: 100%;
+}
+
+/* Tạo giới hạn kích thước */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+/* button CSS */
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 15px;
+  color: white;
+  background-color: var(--blue-color);
+}
+
+/* section CSS */
+section {
+  padding: 50px 0;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.section-sub-title {
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Tất cả thẻ h2 có cha/ông là class section-title sẽ được css */
+.section-title h2 {
+  font-size: 48px;
+  max-width: 500px;
+  display: inline-block;
+}
+
+/* card CSS */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+.card-icon {
+  margin-bottom: 10px;
+}
+.card-title {
+  font-size: 1.5em;
+}
+.card-description {
+}
+
+/* icon CSS */
+
+.icon {
+  background-size: 50% 50%;
+  display: inline-block;
+  border-radius: 50%;
+  width: 108px;
+  height: 108px;
+  background-color: var(--blue-2-color);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-award {
+  background-image: url("./images/icon/award.png");
+}
+.icon-headphone {
+  background-image: url("./images/icon/headphones.png");
+}
+.icon-verified {
+  background-image: url("./images/icon/verified_user.png");
+}
+
+/* list order CSS */
+.list-order {
+  list-style-position: inside;
+}
+
+.list-order li {
+  /* Tạo bước đếm cho li với tên counter  */
+  counter-increment: counter;
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 50px;
+}
+.list-order li::marker {
+  /* xóa bỏ marker - tạo marker mới qua after - before */
+  content: " ";
+}
+
+/* Tạo vòng tròn bọc marker */
+.list-order li::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: var(--blue-2-color);
+  border-radius: 50%;
+  top: -6px;
+  left: 0;
+  z-index: -1;
+}
+.list-order li::after {
+  /* truyền bước đểm tên li vào function đếm */
+  content: counter(counter);
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+/* navbar CSS */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  height: 94px;
+  align-items: center;
+}
+
+/* navbar logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.navbar-logo img {
+  width: 50px;
+}
+.navbar-logo .content {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  /* height: 100%; */
+}
+.navbar li {
+  list-style-type: none;
+  color: var(--black-color);
+  padding: 10px 10px;
+  height: 100%;
+}
+.navbar li:hover {
+  background-color: rgba(203, 200, 200, 0.434);
+  border-radius: 5px;
+}
+.navbar li:last-child:hover {
+  background-color: white;
+  border-radius: 5px;
+}
+.navbar ul a {
+  text-decoration: none;
+}
+
+/* Hero ID CSS */
+
+#hero > * {
+  height: 720px;
+  position: relative;
+}
+.hero-img {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  right: 0;
+}
+.hero-img img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  bottom: 0;
+  right: 0;
+}
+.hero-img img:last-child {
+  z-index: -1;
+  right: -40px;
+  height: 85%;
+}
+
+.hero-content {
+  position: absolute;
+  padding: 200px 0;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.hero-content h1 {
+  font-size: 3em;
+  line-height: 120%;
+}
+.hero-content p {
+  width: 65%;
+}
+.hero-content button {
+  width: 150px;
+}
+
+/* social-proof ID */
+#social-proof .container {
+  display: grid;
+  gap: 80px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* feature ID */
+#feature {
+  background-color: var(--blue-color);
+  color: white;
+}
+#feature .section-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* tutorial */
+
+#tutorial .container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 100px;
+}
+#tutorial .section-content li {
+  text-align: left;
+}
+#tutorial .section-content {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+#tutorial .section-title {
+  text-align: left;
+}
+
+/* Explore ID */
+#explore {
+  background-color: var(--blue-2-color);
+  height: 640px;
+  overflow: hidden;
+}
+#explore > .container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 100%;
+  position: relative;
+}
+.explore-img {
+  position: absolute;
+  height: 100%;
+  bottom: -50px;
+  right: 0;
+  z-index: 0;
+}
+
+/* tạo hình tròn phía sau ảnh, dựa vào z-index: -2 */
+.explore-img::after {
+  content: "";
+  width: 474px;
+  height: 474px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: -2;
+  top: 15%;
+  background-color: var(--blue-color);
+  left: -10px;
+}
+.explore-img img {
+  height: 100%;
+  width: auto;
+}
+/* explore custom section */
+#explore .section-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+#explore .section-content p {
+  width: 70%;
+}
+#explore .section-title {
+  text-align: left;
+  margin-bottom: 0;
+}
+#explore .btn {
+  width: 200px;
+}
+
+/* explore custom card */
+#explore .card-icon {
+  text-align: center;
+  margin-bottom: 0;
+}
+#explore .card-icon img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+#explore .card {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  gap: 10px;
+  font-size: 12px;
+}
+#explore .card-title {
+  font-size: 16px;
+}
+#explore .card-front {
+  position: absolute;
+  left: -85px;
+  top: 52%;
+  z-index: 1;
+}
+
+#explore .card-behind {
+  position: absolute;
+  right: 18px;
+  top: 10%;
+  z-index: -1;
+}
+#explore .card-behind img {
+  width: 32px;
+  height: 32px;
+}
