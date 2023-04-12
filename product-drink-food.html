@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quán coffe của tôi!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div class="banner">
+        <img src="./images/banner.jpg" alt="" />
+      </div>
+      <div class="slogan">COFFE NGON NHẤT LỚP TÔI</div>
+
+      <div class="form-add">
+        <div class="form-title">
+          <h2>Thêm một thức uống mới</h2>
+        </div>
+
+        <div class="form-content">
+          <div class="form-card">
+            <label for="id-product">ID sản phẩm</label>
+            <input type="text" name="imageUrl" id="id-product" />
+          </div>
+          <div class="form-card">
+            <label for="image">Hình ảnh</label>
+            <input type="file" name="imageUrl" id="image" />
+          </div>
+          <div class="product-name">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" name="name" id="product-name" />
+          </div>
+          <div class="form-card">
+            <label for="price">Giá bán</label>
+            <input type="text" name="price" id="price" />
+          </div>
+        </div>
+        <button onclick="handleAdd()">Thêm sản phẩm</button>
+      </div>
+      <div class="form-edit">
+        <div class="form-title">
+          <h2>Sửa một sản phẩm</h2>
+        </div>
+        <div class="form-content">
+          <div class="form-card">
+            <label for="id-product-edit">ID sản phẩm</label>
+            <input type="text" name="imageUrl" id="id-product-edit" disabled />
+          </div>
+          <div class="form-card">
+            <label for="image-edit">Hình ảnh</label>
+            <input type="file" name="imageUrl" id="image-edit" />
+          </div>
+          <div class="product-name">
+            <label for="name-edit">Tên sản phẩm</label>
+            <input type="text" name="name" id="product-name-edit" />
+          </div>
+          <div class="form-card">
+            <label for="price-edit">Giá bán</label>
+            <input type="text" name="price" id="price-edit" />
+          </div>
+        </div>
+        <button onclick="handleEdit()">Edit sản phẩm</button>
+      </div>
+      <br />
+      <div class="search">
+        <input type="text" /> <button onclick="handleSearch()">Search</button>
+      </div>
+      <table cellpadding="10">
+        <caption>
+          <h2>Danh mục sản phẩm sẽ bán</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Hình ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><img src="./images/product-1.jpg" alt="" /></td>
+            <td>Coffe</td>
+            <td>Giá</td>
+            <td><button>Edit</button><button>Delete</button></td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    </main>
+    <footer></footer>
+    <script src="product.js"></script>
+  </body>
+</html>
