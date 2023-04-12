@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bóng đèn</title>
+  </head>
+  <body>
+    <button onclick="handleEat()">Eat</button>
+    <script>
+      const lastName = "Lê";
+      const person = {
+        firstName: "Hưng",
+        lastName: "Nguyễn",
+        fullName: function () {
+          return this.firstName + " " + this.lastName;
+        },
+      };
+
+      function Lamp(status, batery) {
+        this.battery = batery; // Pin của đèn
+        (this.status = status), // trạng thái bật tắt của bóng đèn
+          (this.getBattery = () => this.battery);
+        this.setBattery = (speed) => {
+          this.battery -= speed;
+        };
+        this.setStatus = (status) => (this.status = status);
+      }
+
+      const LAMP_1 = new Lamp(true, 10);
+      //   Method setInterval --> thực hiện lặp lại khối lệnh khoảng thời gian
+      // Method setTimeout --> Thưc thi khối lệnh sau khoảng thời gian
+      let time = setInterval(() => {
+        LAMP_1.setBattery(1);
+        if (LAMP_1.getBattery() <= 0) {
+          LAMP_1.setStatus(false);
+        }
+        if (!LAMP_1.status) {
+          console.log(LAMP_1);
+          clearInterval(time);
+        }
+        console.log("Kiểm tra đèn", LAMP_1.getBattery());
+      }, 100);
+
+      //   Tạo person
+
+      function Person(name, weight, gender, status) {
+        this.name = name;
+        this.weight = weight;
+        this.gender = gender;
+        this.isMarried = status;
+        this.getMarried = () => this.isMarried;
+        this.getGender = () => this.gender;
+        this.getEat = (food) => {
+          if (food.getSize() > 0) {
+            this.weight++;
+          } else {
+            alert("Hết thức ăn rồi, vui lòng tìm thức ăn khác");
+          }
+        };
+        this.setWeight = () => {
+          this.weight++;
+        };
+        this.getKiss = (person) => {
+          if (
+            person.getGender() != this.gender &&
+            !this.isMarried &&
+            !person.getMarried()
+          ) {
+            this.weight--;
+            person.setWeight();
+          } else {
+            alert("Hôn không thành công, vui lòng chọn đối tượng khác");
+          }
+        };
+      }
+
+      function Food(name, size) {
+        this.name = name;
+        this.size = size;
+        this.getSize = () => this.size--;
+      }
+
+      const apple = new Food("Apple", 50);
+      const Adam = new Person("Adam", 60, true);
+      function handleEat() {
+        Adam.getEat(apple);
+        console.log("Kiểm tra Adam", Adam);
+        console.log("Kiểm tra Táo", apple);
+      }
+      const people = [
+        new Person("Eva", 45, false, false),
+        new Person("Khoa", 75, true, true),
+        new Person("Xuyên", 68, true, false),
+      ];
+      console.log(people);
+      people[2].getKiss(people[0]);
+
+      //   Xây dựng hàm find trong Array
+
+      function Array2(array) {
+        this.array = array;
+        this.find2 = (value) => {
+          for (let i = 0; i < this.array.length; i++) {
+            if (this.array[i] === value) {
+              return this.array[i];
+            }
+          }
+        };
+        this.includes2 = (value) => {
+          for (let i = 0; i < this.array.length; i++) {
+            for (let k = 0; k < this.array[i].length; k++) {
+              if (this.array[i][k] === value) {
+                return true;
+              }
+            }
+          }
+          return false;
+        };
+      }
+
+      const arr = new Array2(["hi", "Phúc", "Tú", "Huy"]);
+      const result = arr.find2("Tú");
+      const result2 = arr.includes2("y");
+
+      console.log(result, result2);
+    </script>
+  </body>
+</html>
