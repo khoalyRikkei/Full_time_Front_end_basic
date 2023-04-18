@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form đăng ký</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #register {
+        width: 500px;
+        margin: 0 auto;
+        padding: 50px;
+      }
+      .form-input {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        row-gap: 10px;
+        margin-bottom: 20px;
+        align-items: center;
+      }
+      .form-input > p {
+        grid-column: 1 3;
+      }
+      .form-input > input {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" id="register">
+      <div class="form-input">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" />
+        <p class="error" id="error-email"></p>
+      </div>
+      <div class="form-input">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+        <p class="error" id="error-password"></p>
+      </div>
+      <div class="form-input">
+        <label for="repeapt-password">Repeapt password</label>
+        <input type="password" id="repeapt-password" name="repeaptPassword" />
+        <p class="error" id="error-repeapt-password"></p>
+      </div>
+      <div class="form-input">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" />
+        <p class="error" id="error-username"></p>
+      </div>
+      <div class="form-input">
+        <label for="email">Address</label>
+        <textarea type="text" id="address" name="address" rows="4"></textarea>
+        <p class="error" id="error-address"></p>
+      </div>
+
+      <input type="submit" value="Submit" />
+      <input type="reset" value="Reset" />
+    </form>
+
+    <script>
+      // B1. Lấy dữ liệu từ local về
+      const usersDB = JSON.parse(localStorage.getItem("users")) ?? []; // Xác định được key của db là users --> array --> toàn bộ dữ liệu người dùng
+
+      //   Ban đầu thì không có người dùng
+
+      //  B2. Lấy input
+      const info = getValueInput();
+
+      //   B3. Lắng nghe sự kiện submit
+      const formElement = document.querySelector("#register");
+
+      formElement.addEventListener("submit", (e) => {
+        // B3.1 Cập nhật lại dữ liệu từ local
+        const usersDB = JSON.parse(localStorage.getItem("users")) ?? [];
+
+        // Dùng để dừng hành động action
+        e.preventDefault();
+        // Gán không trùng dữ liệu
+        let isDulicate = false;
+
+        // B3.2 Lọc qua từng phần tử để tìm email trùng nếu có
+        usersDB.forEach((user) => {
+          if (user.email === info.email) {
+            // Nếu email trùng thì gán trạng thái
+            isDulicate = true;
+          }
+        });
+
+        // B3.3 Kiểm tra trùng dữ liệu
+        if (!isDulicate) {
+          // Không trùng thì cho phép đẩy dữ liệu lên local
+          usersDB.push(info);
+          localStorage.setItem("users", JSON.stringify(usersDB));
+        } else {
+          // thông báo người dùng trùng
+          return alert("Trùng email!! Đặt email khác!");
+        }
+      });
+
+      function getValueInput() {
+        const inputElements = document.querySelectorAll(".form-input input");
+        const info = {};
+        inputElements.forEach((element) => {
+          element.addEventListener("input", (event) => {
+            info[event.target.name] = event.target.value;
+            console.log(info.email);
+          });
+        });
+        return info;
+      }
+    </script>
+
+    <!-- Lỗi nếu không có dữ liệu trong localStorage -->
+  </body>
+</html>
