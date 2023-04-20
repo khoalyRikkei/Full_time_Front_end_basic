@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ôn tập CRUD</title>
+    <style>
+      table,
+      th,
+      tr,
+      td {
+        border-collapse: collapse;
+        border: 2px solid black;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 20px;
+        width: 500px;
+      }
+      input {
+        padding: 10px;
+      }
+      .all-form {
+        display: flex;
+        gap: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Trang quản lý đơn hàng</h1></header>
+    <div class="all-form">
+      <form action="" id="add-form">
+        <h3>Thêm mới sản phẩm</h3>
+        <input type="text" placeholder="Tạo id sản phẩm" id="id-product" />
+        <input type="text" placeholder="Nhập tên sản phẩm" id="name-product" />
+        <input type="text" placeholder="Nhập giá sản phẩm" id="price-product" />
+        <input type="submit" value="Thêm sản phẩm" />
+      </form>
+      <form action="" id="edit-form">
+        <h3>Cập nhật sản phẩm</h3>
+        <input
+          type="text"
+          placeholder="Tạo id sản phẩm"
+          id="id-product-edit"
+          disabled
+        />
+        <input
+          type="text"
+          placeholder="Nhập tên sản phẩm"
+          id="name-product-edit"
+        />
+        <input
+          type="text"
+          placeholder="Nhập giá sản phẩm"
+          id="price-product-edit"
+        />
+        <input type="submit" value="Cập nhật" />
+      </form>
+    </div>
+
+    <table cellpadding="20">
+      <!-- Element không đổi -->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <!-- Render lại sản phẩm -->
+      <tbody id="body">
+        <tr>
+          <td>1</td>
+          <td>Lúa mì</td>
+          <td>20000</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      // Tạo sản phẩm
+      // B1: Bắt sự kiện submit
+      const formAdd = document.querySelector("#add-form");
+      formAdd.addEventListener("submit", (event) => {
+        event.preventDefault();
+        // B2: Lấy thông tin từ input - lấy trực tiếp từ input hoặc tạo function để tái sử dụng
+        const idValue = document.querySelector("#id-product").value;
+        const nameValue = document.querySelector("#name-product").value;
+        const priceValue = document.querySelector("#price-product").value;
+        const newProduct = {
+          id: idValue,
+          name: nameValue,
+          price: priceValue,
+        };
+
+        // B3. Lấy data từ localStorage để kiểm tra trung lập và dẩy dữ liệu lên
+        const productsDB = JSON.parse(localStorage.getItem("products")) ?? [];
+        let isDulicate = false;
+        productsDB.forEach((element) => {
+          if (element.id === idValue) {
+            isDulicate = true;
+          }
+          //
+        });
+
+        // B4. Kiểm tra dữ liệu có trùng lặp trong data hay không
+        if (isDulicate) {
+          alert("ID trùng, vui lòng đặt id mới");
+          return;
+        }
+        // B5. Đẩy dữ liệu lên localStorage nếu không trùng
+        productsDB.push(newProduct);
+        localStorage.setItem("products", JSON.stringify(productsDB));
+
+        // B6. Render lại sản phẩm
+        renderProducts();
+
+        //
+      });
+
+      function handleDelete(id) {
+        // B1. Lấy data từ localStorage để kiểm tra trùng lập và dẩy dữ liệu lên
+        const productsDB = JSON.parse(localStorage.getItem("products"));
+
+        //B2. Tìm kiếm trong data và loại bỏ phần từ trùng id
+        productsDB.forEach((product, index) => {
+          if (product.id === id) {
+            productsDB.splice(index, 1);
+          }
+        });
+
+        // B3. Cập nhật lại dữ liệu lên localStorage
+        localStorage.setItem("products", JSON.stringify(productsDB));
+
+        // B4. Render lại sản phẩm
+        renderProducts();
+      }
+
+      // Update sản phẩm
+      // Phần 1: Lấy thông tin sản phẩm cần update chuyển qua form
+      // B1. Bắt sự kiện edit để lấy thông tin sản phẩm
+      function handleEdit(id) {
+        // B2. Lấy dữ liệu từ localStorage để tìm kiếm tất thông tin về sản phẩm đó
+        const productsDB = JSON.parse(localStorage.getItem("products"));
+
+        let product = {};
+        productsDB.forEach((item) => {
+          if (item.id === id) {
+            product = item;
+          }
+        });
+
+        // B3. Truyền thông tin sản phẩm lên form
+        const idElement = document.querySelector("#id-product-edit");
+        const nameElement = document.querySelector("#name-product-edit");
+        const priceElement = document.querySelector("#price-product-edit");
+
+        // B3.1 Gán lại thông tin
+
+        idElement.value = product.id;
+        nameElement.value = product.name;
+        priceElement.value = product.price;
+      }
+
+      // Phần 2: Cập nhật thông tin từ form
+      // B1. Bắt sự kiện submit form Edit
+      const formEdit = document.querySelector("#edit-form");
+      formEdit.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // B2. Lấy dữ liệu từ localStorage để tìm kiếm tất thông tin về sản phẩm đó
+        const productsDB = JSON.parse(localStorage.getItem("products"));
+
+        // B3. Lấy giá trị từ form
+        const idValue = document.querySelector("#id-product-edit").value;
+        const nameValue = document.querySelector("#name-product-edit").value;
+        const priceValue = document.querySelector("#price-product-edit").value;
+
+        // B3.1 tạo biến lưu đối tương
+
+        const productUpdate = {
+          id: idValue,
+          name: nameValue,
+          price: priceValue,
+        };
+        productsDB.forEach((item, index) => {
+          if (item.id == productUpdate.id) {
+            productsDB.splice(index, 1, productUpdate);
+          }
+        });
+
+        // B4. Cập nhật lại localStorage
+        localStorage.setItem("products", JSON.stringify(productsDB));
+
+        // B5. Render lại sản phẩm
+        renderProducts();
+      });
+
+      function handleUpdate() {}
+
+      // Render sản phẩm
+      renderProducts();
+      function renderProducts() {
+        //   B1: Lấy thông tin từ localStorage
+        const productsDB = JSON.parse(localStorage.getItem("products")) ?? []; // Nếu như productDB là null (chưa có sản phẩm) --> productDB sẽ được gán bằng mảng rỗng
+
+        // B2: Lấy element sẽ render sản phẩm
+        const tbodyElement = document.querySelector("#body");
+
+        // B3. Tạo biến content để chứa tất cả sản phẩm sẽ được render
+
+        let contentBody = "";
+
+        // B4. Lập và từng sản phẩm để thêm vào content
+
+        productsDB.forEach((element, index) => {
+          contentBody += `
+                  <tr>
+                      <td>${index + 1}</td>
+                      <td>${element.name}</td>
+                      <td>${element.price}</td>
+                      <td><button onclick="handleEdit('${
+                        element.id
+                      }')">Edit</button> <button onclick="handleDelete('${
+            element.id
+          }')">Delete</button></td>
+                  </tr>`;
+        });
+
+        //B5. Gán lại innerHTML của element
+        tbodyElement.innerHTML = contentBody;
+      }
+    </script>
+  </body>
+</html>
