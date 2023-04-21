@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      form {
+        width: 500px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 0 auto;
+      }
+
+      input {
+        padding: 10px;
+        width: 100%;
+      }
+
+      .error {
+        color: red;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" id="form-login">
+      <h3>Login</h3>
+      <div class="form-input">
+        <input type="text" placeholder="Nhập email" id="email-input" />
+      </div>
+
+      <div class="form-input">
+        <input type="password" placeholder="Tạo password" id="password-input" />
+      </div>
+      <p class="error" id="error"></p>
+      <input type="submit" value="Đăng nhập" />
+    </form>
+    <script>
+      const form = document.querySelector("#form-login");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // B1. Lấy thông tin từ form
+        const emailValue = document
+          .querySelector("#email-input")
+          .value.trim()
+          .toLowerCase();
+        const passwordValue = document.querySelector("#password-input").value;
+
+        // B2. Lấy dữ liệu từ localStorage về so sánh
+
+        const accountsDB = JSON.parse(localStorage.getItem("accounts")) || [];
+        let userLogin;
+
+        // B3. So sánh user với từng phần tử trong accountDB
+        accountsDB.forEach((user) => {
+          if (emailValue === user.email && passwordValue === user.password) {
+            // B3.1. Gán userLogin = user
+            userLogin = user;
+            // B3.2 Xóa key password để bảo mật thông tin người dùng
+
+            delete userLogin.password;
+          }
+        });
+
+        // B4. Đấy user lên localStorge
+        if (userLogin) {
+          localStorage.setItem("userLogin", JSON.stringify(userLogin));
+        } else {
+          const errorElement = document.querySelector("#error");
+          errorElement.innerHTML =
+            "Email hoặc mật khẩu không chính xác, vui lòng đăng nhập lại";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký thông tin tài khoản</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      form {
+        width: 500px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 0 auto;
+      }
+
+      input {
+        padding: 10px;
+        width: 100%;
+      }
+
+      .error {
+        color: red;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" id="form-register">
+      <h3>Register</h3>
+      <div class="form-input">
+        <input type="text" placeholder="Nhập email" id="email-input" />
+        <p class="error" id="error-email"></p>
+      </div>
+      <div class="form-input">
+        <input type="text" placeholder="Tạo user name" id="username-input" />
+        <p class="error" id="error-username"></p>
+      </div>
+      <div class="form-input">
+        <input type="password" placeholder="Tạo password" id="password-input" />
+        <p class="error" id="error-password"></p>
+      </div>
+      <div class="form-input">
+        <input
+          type="password"
+          placeholder="confirm password"
+          id="confirm-password-input"
+        />
+        <p class="error" id="error-confirm-password"></p>
+      </div>
+
+      <input type="submit" value="Đăng ký" />
+    </form>
+
+    <script>
+      const form = document.querySelector("#form-register");
+
+      form.addEventListener("submit", (e) => {
+        console.log(e);
+        e.preventDefault();
+
+        // B1. Lấy giá trị trong trường thông tin (input)
+        const emailValue = document
+          .querySelector("#email-input")
+          .value.trim()
+          .toLowerCase();
+        const userNameValue = document.querySelector("#username-input").value;
+        const passwordValue = document.querySelector("#password-input").value;
+        const confirmPasswordValue = document.querySelector(
+          "#confirm-password-input"
+        ).value;
+
+        // B2. Kiểm tra valadate
+        const rexgEmail =
+          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        //   B3. tạo một biến để chứa thông tin lỗi
+        const error = {
+          isError: false,
+          emailMsg: "",
+          passwordMsg: "",
+          confirmPasswordMsg: "",
+        };
+
+        // B4. Check điều kiện lỗi và gán thông tin lỗi
+        if (!emailValue.match(rexgEmail)) {
+          error.isError = true;
+          error.emailMsg = "Email không đúng định dạng, vui lòng nhập lại";
+        }
+
+        if (emailValue.length > 30) {
+          error.isError = true;
+          error.emailMsg = "Email quá dài! Vui lòng nhập lại";
+        }
+        if (
+          !passwordValue ||
+          passwordValue.length < 8 ||
+          passwordValue.length > 20
+        ) {
+          error.isError = true;
+          error.passwordMsg =
+            "Password phải lớn hơn 8 ký tự và bé hơn 20 ký tự";
+        }
+
+        if (passwordValue !== confirmPasswordValue) {
+          error.isError = true;
+          error.confirmPasswordMsg = "Mật khẩu không trùng, vui lòng nhập lại";
+        }
+
+        //B5. Hiển thị lỗi
+
+        renderError(error);
+
+        // B6. Thực hiện kiểm tra thông tin với local
+        if (!error.isError) {
+          const accounts = JSON.parse(localStorage.getItem("accounts")) ?? [];
+          let isDulicate = false;
+          accounts.forEach((user) => {
+            if (user.email === emailValue) {
+              error.emailMsg =
+                "Email đã tồn tại, vui lòng chọn email khác hoặc login";
+              isDulicate = true;
+              renderError(error);
+            }
+          });
+
+          if (!isDulicate) {
+            accounts.push({
+              email: emailValue,
+              password: passwordValue,
+              userName: userNameValue,
+            });
+            localStorage.setItem("accounts", JSON.stringify(accounts));
+
+            window.location = "login.html";
+          }
+        }
+      });
+
+      function renderError(error) {
+        const errorEmailElement = document.querySelector("#error-email");
+        const errorPasswordElement = document.querySelector("#error-password");
+        const errorConfirmPasswordElement = document.querySelector(
+          "#error-confirm-password"
+        );
+        errorEmailElement.innerHTML = error.emailMsg;
+        errorPasswordElement.innerHTML = error.passwordMsg;
+        errorConfirmPasswordElement.innerHTML = error.confirmPasswordMsg;
+      }
+    </script>
+  </body>
+</html>

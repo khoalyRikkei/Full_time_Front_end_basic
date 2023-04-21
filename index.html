@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        background-color: pink;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+      }
+
+      .hidden {
+        display: none;
+      }
+      .navbar-feature {
+        display: flex;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="./images/logo-huawei.jpg" alt="" width="100" />
+        </div>
+        <div class="navbar-feature">
+          <div class="user-info"></div>
+          <div class="navbar-btn">
+            <button class="btn-log in">Đăng nhập</button>
+            <button class="btn-log out">Đăng xuất</button>
+            <button class="btn-sign up">Đăng ký</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <script>
+      const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+      const navElement = document.querySelector("nav");
+
+      if (userLogin) {
+        const contentNav = `
+
+        <div class="logo">
+          <img src="./images/logo-huawei.jpg" alt="" width="100" />
+        </div>
+        <div class="navbar-feature">
+          <div class="user-info">${userLogin.userName}</div>
+          <div class="navbar-btn">
+           
+            <button class="btn-log out">Đăng xuất</button>
+        
+          </div>
+        </div>
+ `;
+        navElement.innerHTML = contentNav;
+
+        navElement;
+      }
+    </script>
+  </body>
+</html>
