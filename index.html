@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       * {
         margin: 0;
@@ -26,6 +33,22 @@
         display: flex;
         gap: 20px;
       }
+      table,
+      th,
+      tr,
+      td {
+        border: 2px solid;
+        border-collapse: collapse;
+      }
+      table {
+        width: 500px;
+        margin: 50px auto;
+      }
+      .fa-solid {
+        font-size: 20px;
+        margin: 10px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -37,37 +60,164 @@
         <div class="navbar-feature">
           <div class="user-info"></div>
           <div class="navbar-btn">
-            <button class="btn-log in">Đăng nhập</button>
-            <button class="btn-log out">Đăng xuất</button>
+            <a href="./login.html"
+              ><button class="btn-log in">Đăng nhập</button></a
+            >
             <button class="btn-sign up">Đăng ký</button>
+            <button>
+              <i
+                class="fa-solid fa-bag-shopping"
+                onclick="handleViewCarts()"
+              ></i>
+            </button>
           </div>
         </div>
       </nav>
     </header>
-
+    <main>
+      <table cellpadding="15">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá sản phẩm</th>
+            <th>Đơn vị</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Ngũ cốc dinh dưỡng</td>
+            <td>65000</td>
+            <td>gói</td>
+            <td>
+              <button onclick="handleAdd()">
+                <i class="fa-solid fa-cart-plus"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <script src="./db.js"></script>
     <script>
       const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+      const productsDB = JSON.parse(localStorage.getItem("productList")) ?? [];
 
       const navElement = document.querySelector("nav");
 
       if (userLogin) {
-        const contentNav = `
+      }
 
-        <div class="logo">
-          <img src="./images/logo-huawei.jpg" alt="" width="100" />
-        </div>
-        <div class="navbar-feature">
-          <div class="user-info">${userLogin.userName}</div>
-          <div class="navbar-btn">
-           
-            <button class="btn-log out">Đăng xuất</button>
-        
-          </div>
-        </div>
- `;
-        navElement.innerHTML = contentNav;
+      function handleLogout() {
+        localStorage.removeItem("userLogin");
+        window.location = "login.html";
+      }
 
-        navElement;
+      renderData(productsDB, userLogin);
+
+      //   Render index
+      function renderData(data, user) {
+        if (user) {
+          const contentNav = `
+
+      <div class="logo">
+        <img src="./images/logo-huawei.jpg" alt="" width="100" />
+      </div>
+      <div class="navbar-feature">
+        <div class="user-info">${userLogin.userName}</div>
+        <div class="navbar-btn">
+            <button>
+              <i
+                class="fa-solid fa-bag-shopping"
+                onclick="handleViewCarts()"
+              ></i>
+            </button>
+          <button class="btn-log out" onclick="handleLogout()">Đăng xuất</button>
+          
+        </div>
+      </div>
+      `;
+          navElement.innerHTML = contentNav;
+
+          navElement;
+        }
+
+        const tbodyElement = document.querySelector("tbody");
+        let contentBody = "";
+        data.forEach((product, index) => {
+          contentBody += `<tr>
+                  <td>${index + 1}</td>
+                  <td>${product.name}</td>
+                  <td>${product.price}</td>
+                  <td>${product.unit}</td>
+                  <td>
+                    <button onclick="handleAdd('${product.id}')">
+                      <i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                  </td>
+                </tr>`;
+        });
+        tbodyElement.innerHTML = contentBody;
+      }
+
+      //   Khi thêm sản phẩm vào giỏ hàng
+
+      function handleAdd(productId) {
+        let addProduct;
+        const carts = JSON.parse(localStorage.getItem("carts")) ?? [];
+
+        // Tìm sản phẩm được mua trong tất cả sản phẩm
+        productsDB.forEach((product) => {
+          if (product.id == productId) {
+            addProduct = product;
+            addProduct.quantity = 1;
+          }
+        });
+        let isDulicate = false;
+        carts.forEach((cart, index) => {
+          if (cart.id == addProduct.id) {
+            cart.quantity++;
+            isDulicate = true;
+          }
+        });
+        if (!isDulicate) {
+          carts.push(addProduct);
+        }
+        localStorage.setItem("carts", JSON.stringify(carts));
+        // Nếu người dùng đăng nhập rồi thì đẩy dữ liệu vào accounts lưu trữ cart người dùng
+        if (userLogin) {
+          const accounts = JSON.parse(localStorage.getItem("accounts")) ?? [];
+          accounts.forEach((user) => {
+            if (user.email === userLogin.email) {
+              if (!user.cart) {
+                return (user.card = carts);
+              }
+              user.cart?.forEach((cartDB) => {
+                let isDulicate = false;
+                carts.forEach((cartNew) => {
+                  if (cartDB.id == cartNew.id) {
+                    isDulicate = true;
+                    cartDB.quantity++;
+                  }
+                });
+                if (!isDulicate) {
+                  user.cart.push(cartNew);
+                }
+              });
+            }
+          });
+          localStorage.setItem("accounts", JSON.stringify(accounts));
+        }
+      }
+      //Nếu người dùng login mới cho view
+      function handleViewCarts() {
+        if (userLogin) {
+          window.location = "/carts.html";
+        } else {
+          window.location = "/login.html";
+        }
       }
     </script>
   </body>

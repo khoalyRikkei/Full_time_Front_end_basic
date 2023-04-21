@@ -49,7 +49,6 @@
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-
         // B1. Lấy thông tin từ form
         const emailValue = document
           .querySelector("#email-input")
@@ -76,6 +75,7 @@
         // B4. Đấy user lên localStorge
         if (userLogin) {
           localStorage.setItem("userLogin", JSON.stringify(userLogin));
+          window.location = "/";
         } else {
           const errorElement = document.querySelector("#error");
           errorElement.innerHTML =
