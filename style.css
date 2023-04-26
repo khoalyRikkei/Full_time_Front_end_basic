@@ -1,0 +1,100 @@
+:root {
+  font-family: Helvetica, sans-serif;
+  background-color: #f0f0f0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ul.navbar-nav {
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+}
+
+.navbar-brand img {
+  width: 50px;
+}
+
+/* Banner CSS */
+#banner {
+  position: relative;
+}
+.container-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-left: 50px;
+}
+
+.banner-empty {
+  width: 100%;
+  height: 60%;
+}
+
+.banner-text {
+  position: sticky;
+  bottom: 50px;
+  font-weight: 800;
+}
+
+.banner-text .text-red {
+  color: red;
+  font-weight: 700;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+.banner-text h3 {
+  font-size: 70px;
+  font-weight: 800;
+}
+
+.banner-text p {
+  font-size: 40px;
+}
+
+/* DOT */
+
+.card {
+  border-radius: 25px;
+  box-shadow: 1px 1px 20px rgba(128, 128, 128, 0.59);
+}
+.card-title {
+  font-weight: 700;
+  font-size: 20px;
+}
+.card-title h3 {
+  font-size: 2em;
+}
+
+.card-foot {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.bg-pink {
+  background-color: pink;
+}
+.bg-grey {
+  background-color: grey;
+}
+.bg-black {
+  background-color: black;
+}
+.bg-purple {
+  background-color: purple;
+}
