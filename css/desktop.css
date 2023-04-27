@@ -3,6 +3,7 @@
   --accent-color: #bfd2f8;
   --primary-color: #1f2b6c;
   --black-color: #212124;
+  --white-color: #fcfefe;
 }
 
 * {
@@ -14,6 +15,33 @@
 body {
   font-size: 16px;
   font-family: "Work Sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* btn css */
+.btn {
+  padding: 13px 35px;
+  font-weight: 600;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border-radius: 50px;
+  border: none;
+}
+
+/* card-mini */
+
+.card-mini {
+  border-radius: 5px;
+  height: 100px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 /* Create icon */
@@ -37,6 +65,27 @@ body {
   background-image: url("../images/icons/icon-location.png");
 }
 
+.icon-search {
+  background-image: url("../images/icons/icon-search.png");
+  width: 20px;
+  height: 20px;
+}
+.icon-calendar {
+  background-image: url("../images/icons/icon-calendar.png");
+  width: 50;
+  height: 50px;
+}
+.icon-team {
+  background-image: url("../images/icons/icon-team.png");
+  width: 50px;
+  height: 33px;
+}
+.icon-cash {
+  background-image: url("../images/icons/icon-cash.png");
+  width: 50px;
+  height: 33px;
+}
+
 /* TEXT CSS */
 
 .text--upper {
@@ -51,6 +100,26 @@ body {
   color: var(--secondary-color);
 }
 
+/* section CSS */
+
+.section {
+  margin-bottom: 64px;
+}
+
+.section__title {
+  font-size: 32px;
+  color: var(--primary-color);
+  font-family: "Yeseva One";
+  text-align: center;
+}
+
+.section__title--sub {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 18px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+}
 /* LOGO CSS */
 .logo {
   font-size: 36px;
@@ -91,4 +160,86 @@ body {
 .top-header .container {
   display: flex;
   justify-content: space-between;
+}
+
+/* Navbar css */
+
+.navbar {
+  background-color: var(--primary-color);
+  padding: 30px 0;
+}
+
+.navbar > .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar__menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navbar__menu li {
+  list-style-type: none;
+  color: var(--white-color);
+  font-weight: 18px;
+}
+.navbar__menu li:hover {
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.navbar__feature {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+/* Hero css */
+#hero {
+  height: 550px;
+  background-image: url("../images/hero.png");
+  background-size: cover;
+  background-position: right;
+  width: 100%;
+}
+#hero .container {
+  height: 100%;
+}
+
+#hero .section__title {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: left;
+}
+
+#hero .btn {
+  width: 170px;
+  margin-top: 30px;
+}
+
+/* apointment css */
+#apointment {
+  margin-top: -114px;
+}
+
+#apointment .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+#apointment .container > div:first-child {
+  color: var(--accent-color);
+  background-color: var(--primary-color);
+}
+#apointment .container > div:nth-child(2) {
+  color: var(--primary-color);
+  background-color: var(--accent-color);
+}
+#apointment .container > div:last-child {
+  color: var(--white-color);
+  background-color: var(--secondary-color);
 }
