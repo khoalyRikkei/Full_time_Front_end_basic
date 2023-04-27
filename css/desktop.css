@@ -1,0 +1,94 @@
+:root {
+  --secondary-color: #159eec;
+  --accent-color: #bfd2f8;
+  --primary-color: #1f2b6c;
+  --black-color: #212124;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Work Sans", sans-serif;
+}
+
+/* Create icon */
+
+.icon {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-phone {
+  background-image: url("../images/icons/icon-phone.png");
+}
+.icon-clock {
+  background-image: url("../images/icons/icon-clock.png");
+}
+.icon-location {
+  background-image: url("../images/icons/icon-location.png");
+}
+
+/* TEXT CSS */
+
+.text--upper {
+  text-transform: uppercase;
+}
+
+.text--primary {
+  color: var(--primary-color);
+}
+
+.text--secondary {
+  color: var(--secondary-color);
+}
+
+/* LOGO CSS */
+.logo {
+  font-size: 36px;
+  font-family: "Yeseva One";
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.logo span {
+  color: var(--secondary-color);
+}
+
+/* HEADER TOP */
+
+.item-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.item-info > * {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.item-info__content * {
+  font-weight: 500;
+}
+
+.top-header {
+  padding: 19px 0;
+}
+.container {
+  max-width: 992px;
+  margin: 0 auto;
+}
+
+.top-header .container {
+  display: flex;
+  justify-content: space-between;
+}
