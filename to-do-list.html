@@ -86,13 +86,20 @@
 
         $("form").submit((e) => {
           e.preventDefault();
-          const nameEdit = e.originalEvent.submitter.name;
-
-          if (nameEdit === "update") {
-            return;
-          }
-
           const valueInput = $("#form1").val();
+          const nameEdit = e.originalEvent.submitter.name;
+          const index = $(e.originalEvent.submitter).attr("index");
+          const rowEdit = $("tbody tr")[index];
+          const td = $(rowEdit).find("td")[1];
+          if (nameEdit === "update") {
+            $(td).text(valueInput);
+            $("#edit-add").attr("name", "Add");
+            $("#edit-add").text("Add");
+            return;
+          } else if (nameEdit === "finish") {
+            const tdFinish = $(rowEdit).find("td")[2];
+            $(tdFinish).text("Done");
+          }
           $(".table").show();
 
           const lengthTr = $("tbody tr").length;
@@ -102,8 +109,8 @@
                     <td>In progress</td>
                     <td>
                       <button type="submit" class="btn btn-danger" onclick="handleDelete(this)">x</button>
-                      <button type="submit" class="btn btn-warning" onclick="handleEdit(this)">Edit</button>
-                      <button type="submit" class="btn btn-success ms-1" onclick="handleFinish(this)">Finished</button>
+                      <button type="submit" class="btn btn-warning" onclick="handleEdit(this, 'edit')">Edit</button>
+                      <button type="submit" class="btn btn-success ms-1" onclick="handleEdit(this, 'finish')">Finished</button>
                     </td>
                   </tr>`);
         });
@@ -116,18 +123,21 @@
 
         // Edit dữ liệu
 
-        window.handleEdit = function (element) {
+        window.handleEdit = function (element, status) {
           // B1: Đưa dữ liệu lên ô input
           const trElement = $(element).closest("tr");
           const tdEdit = $(trElement).find("td")[1];
+
+          // Tìm index của bản thân trong tất cả những element tương tự
+          const index = $("tbody tr").index(trElement);
 
           $("#form1").val($(tdEdit).text());
 
           // B2: Chuyển đổi nút Save  --> Update --> Đổi luôn attribute để nhận biết update (attribute)
 
           $("#edit-add").text("Update");
-          $("#edit-add").attr("name", "update");
-          $("#edit-add").attr("name", "update");
+          $("#edit-add").attr("name", status);
+          $("#edit-add").attr("index", index);
 
           // B3: xử lts function update
         };
