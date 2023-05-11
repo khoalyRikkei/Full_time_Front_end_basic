@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="users"></div>
+
+    <div id="html"></div>
+    <script>
+      // Các cách dùng ajax
+
+      $(document).ready(() => {
+        let users;
+
+        $.ajax({
+          url: "https://6270afdbe1c7aec428f6ada4.mockapi.io/user",
+        }).done((res) => {
+          if (res) {
+            renderData(res);
+            users = res;
+          }
+        });
+
+        window.handleEdit = function (id) {
+          const userEdit = users.find((item) => item.id == id);
+          const newData = users.map((item) => {
+            if (item.id === id) {
+              userEdit.name = "Rikkei Academy";
+            }
+            return item;
+          });
+
+          userEdit.name = "Rikkei Academy";
+          $.ajax({
+            url: "https://6270afdbe1c7aec428f6ada4.mockapi.io/user",
+            type: "post",
+            data: userEdit,
+          }).done((res) => {
+            if (res) {
+              renderData(newData);
+            }
+          });
+        };
+
+        // Đẩy dữ liệu
+
+        $.get("to-do-list.html").done((result) => {
+          const table = $(result).find("table")[0];
+          $("#html").append(table);
+        });
+      });
+
+      function renderData(data) {
+        const usersElement = $("#users");
+
+        let contentUser = "";
+
+        data.forEach((user) => {
+          contentUser += `<div class="card" style="width: 18rem;">
+            <img src=${user.imgUrl} class="card-img-top" alt="..." width='100%'>
+                <div class="card-body">
+                    <p class="card-text">${user.name}</p>
+                    <p class="card-text">${user.address}</p>
+                </div>
+                <button onclick="handleEdit('${user.id}')">Edit</button>
+                <button onclick="handleDelete('${user.id}')">Edit</button>
+                </div>`;
+        });
+        usersElement.html(contentUser);
+      }
+
+      try {
+        const newData = await;
+      } catch (e) {}
+    </script>
+  </body>
+</html>

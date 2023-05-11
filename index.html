@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Bài 23 - Jquery</title>
+  </head>
+  <body>
+    <h1>Hello Rikkei Academy</h1>
+    <button id="click">Click me</button>
+    <p id="change">Ẩn hiện</p>
+    <form action="">
+      <input type="text" id="email" class="input-form" />
+      <input type="password" id="password" class="input-form" />
+      <input type="submit" value="submit" />
+    </form>
+    <button id="hidden-password">Ẩn hiện password</button>
+
+    <!-- Ẩn hiện  -->
+
+    <button id="hide">Toggle</button>
+    <h2 class="toggle">Hello world!</h2>
+    <h2 class="fading">Fading</h2>
+
+    <p id="log"></p>
+
+    <p id="result">111111111111111111111111</p>
+
+    <script>
+      $(document).ready(() => {
+        console.log(document);
+
+        // JQuery với selector
+        $("h1").text("Hello lớp JS_ĐN");
+
+        $("#click").click((event) => {
+          console.log("Kiểm tra event", event);
+          // Ẩn hiện
+          $("#change").toggle();
+        });
+
+        // lấy dữ liệu từ form
+
+        $("form").submit((e) => {
+          e.preventDefault();
+          const inputElement = $("#email");
+          const valueInput = $("#email").val();
+          const input = $(".input-form");
+
+          console.log("Kiểm tra email", inputElement);
+          console.log("Kiểm tra  value email", valueInput);
+          console.log("Kiểm tra  input", input);
+          input.forEach((element) => {});
+        });
+
+        // Chức năng ẩn hiện password
+        $("#hidden-password").click(() => {
+          const typeInput = $("#password").attr("type");
+
+          if (typeInput === "password") {
+            $("#password").attr("type", "text");
+          } else {
+            $("#password").attr("type", "password");
+          }
+          innerHTML = "";
+        });
+
+        $("#hide").click(() => {
+          $(".toggle").slideToggle(1000);
+          $(".fading").fadeToggle(5000, "linear", () => {
+            $("#log").append("<div>finished</div>");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
